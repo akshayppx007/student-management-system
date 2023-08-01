@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { Link, withRouter } from "react-router-dom";
+import { Link, useNavigate, withRouter } from "react-router-dom";
 import FeatherIcon from "feather-icons-react";
 import { Scrollbars } from "react-custom-scrollbars";
 // import { LogoImg, LogoSmallImg } from "../_components/imagepath";
@@ -8,7 +8,8 @@ const Sidebar = (props) => {
   const [isSideMenu, setSideMenu] = useState("");
   const [isSideMenuLevel, setSideMenuLevel] = useState("");
   const [isSideMenuLevel2, setSideMenuLevel2] = useState("");
-
+  const navigate = useNavigate();
+  let pathName;
   const toggleSidebar = (value) => {
     console.log(value);
     setSideMenu(value);
@@ -75,9 +76,12 @@ const Sidebar = (props) => {
   
   
 
-  let pathName = props.location.pathname;
-
-  console.log("Working", pathName);
+  if (props && props.location && props.location.pathname) {
+    pathName = props.location.pathname; // Set the value of pathName
+    console.log("Working", pathName);
+  } else {
+    console.log("Unable to get the pathname from props.location.");
+  }
 
 
   return (
@@ -1924,4 +1928,4 @@ const Sidebar = (props) => {
     </>
   );
 };
-export default withRouter(Sidebar);
+export default Sidebar;
