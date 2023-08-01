@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 // server.js
 
 const express = require('express');
@@ -33,3 +34,20 @@ app.delete('/delete/:filename', (req, res) => {
 app.listen(port, () => {
   console.log(`Server running on http://localhost:${port}`);
 });
+=======
+const app = require("./app");
+const dotenv = require("dotenv");
+const connectDatabase = require("./config/database");
+
+// config
+dotenv.config();
+
+// database
+connectDatabase();
+
+const PORT = process.env.PORT || 7004;
+
+app.listen(PORT, () => {
+  console.log(`server started on port: ${PORT}`);
+});
+>>>>>>> 8dd11b44cbb22fdda453a1b1fa3826dcfc7d78f8
