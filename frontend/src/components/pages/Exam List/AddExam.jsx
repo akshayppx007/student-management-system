@@ -9,7 +9,6 @@ import 'react-time-picker/dist/TimePicker.css';
 import 'react-clock/dist/Clock.css';
 import Select2 from "react-select2-wrapper";
 import { useState } from 'react'
-import { TextField } from "@mui/material";
 
 const AddExam = () => {
     const [startDate, setStartDate] = useState(new Date());
