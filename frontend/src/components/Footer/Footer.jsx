@@ -3,7 +3,7 @@ const Footer = () => {
     return (
         <>
             <footer>
-                <p>Copyright © 2022 Dreamguys.</p>
+                <p>Copyright © {new Date().getFullYear()} Hirola InfoTech Solutions  </p>
             </footer>
         </>
     )

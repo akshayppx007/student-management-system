@@ -30,6 +30,16 @@ const AddStudent = () => {
         { id: 3, text: 'Christian' },
         { id: 4, text: 'Others' }      
 	]);
+    const [courses, setsetCourse] = useState([
+       
+        { id: 1, text: 'Courses 1' },
+        { id: 2, text: 'Courses 2' },
+        { id: 3, text: 'Courses 3' },  
+        { id: 4, text: 'Courses 4' },      
+        { id: 5, text: 'Courses 5' },      
+        { id: 6, text: 'Courses 6' },      
+        { id: 7, text: 'Courses 7' },      
+	]);
     const [clas, setClas] = useState([
         { id: 1, text: 'Please Select Class' },
         { id: 2, text: '12' },
@@ -202,11 +212,13 @@ const AddStudent = () => {
                                                         <label>
                                                             Select Course (Option 1)<span className="login-danger">*</span>
                                                         </label>
-                                                        <input
-                                                            className="form-control"
-                                                            type="text"
-                                                            placeholder="Enter Select Course"
-                                                        />
+                                                        < Select2
+                                                            className="w-100 form-control select"
+                                                            data={courses}
+                                                            options={{
+                                                                placeholder:'Please Select Group'
+                                                            }}
+                                                     />	
                                                     </div>
                                                 </div>
                                                 <div className="col-12 col-sm-4">
@@ -233,54 +245,7 @@ const AddStudent = () => {
                                                         />
                                                     </div>
                                                 </div>
-                                                <div className="col-12 col-sm-4">
-                                                    <div className="form-group local-forms">
-                                                        <label>
-                                                            First Name <span className="login-danger">*</span>
-                                                        </label>
-                                                        <input
-                                                            className="form-control"
-                                                            type="text"
-                                                            placeholder="Enter First Name"
-                                                        />
-                                                    </div>
-                                                </div>
-                                                <div className="col-12 col-sm-4">
-                                                    <div className="form-group local-forms">
-                                                        <label>
-                                                            First Name <span className="login-danger">*</span>
-                                                        </label>
-                                                        <input
-                                                            className="form-control"
-                                                            type="text"
-                                                            placeholder="Enter First Name"
-                                                        />
-                                                    </div>
-                                                </div>
-                                                <div className="col-12 col-sm-4">
-                                                    <div className="form-group local-forms">
-                                                        <label>
-                                                            First Name <span className="login-danger">*</span>
-                                                        </label>
-                                                        <input
-                                                            className="form-control"
-                                                            type="text"
-                                                            placeholder="Enter First Name"
-                                                        />
-                                                    </div>
-                                                </div>
-                                                <div className="col-12 col-sm-4">
-                                                    <div className="form-group local-forms">
-                                                        <label>
-                                                            Last Name <span className="login-danger">*</span>
-                                                        </label>
-                                                        <input
-                                                            className="form-control"
-                                                            type="text"
-                                                            placeholder="Enter First Name"
-                                                        />
-                                                    </div>
-                                                </div>
+                                               
                                                 <div className="col-12 col-sm-4">
                                                     <div className="form-group local-forms">
                                                         <label>
@@ -359,18 +324,7 @@ const AddStudent = () => {
                                                      />	
                                                     </div>
                                                 </div>
-                                                <div className="col-12 col-sm-4">
-                                                    <div className="form-group local-forms">
-                                                        <label>
-                                                            E-Mail <span className="login-danger">*</span>
-                                                        </label>
-                                                        <input
-                                                            className="form-control"
-                                                            type="text"
-                                                            placeholder="Enter Email Address"
-                                                        />
-                                                    </div>
-                                                </div>
+                                               
                                                 <div className="col-12 col-sm-4">
                                                     <div className="form-group local-forms">
                                                         <label>
@@ -421,16 +375,7 @@ const AddStudent = () => {
                                                         />
                                                     </div>
                                                 </div>
-                                                <div className="col-12 col-sm-4">
-                                                    <div className="form-group local-forms">
-                                                        <label>Phone </label>
-                                                        <input
-                                                            className="form-control"
-                                                            type="text"
-                                                            placeholder="Enter Phone Number"
-                                                        />
-                                                    </div>
-                                                </div>
+                                              
                                                 <div className="col-12 col-sm-4">
                                                     <div className="form-group students-up-files">
                                                         <label>Upload Student Photo (150px X 150px)</label>

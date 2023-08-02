@@ -252,10 +252,10 @@ const Header = () => {
                   className="rounded-circle"
                   src={avatar01}
                   width={31}
-                  alt="Ryan Taylor"
+                  alt=" Signet"
                 />
                 <div className="user-text">
-                  <h6>Ryan Taylor</h6>
+                  <h6> Signet</h6>
                   <p className="text-muted mb-0">Administrator</p>
                 </div>
               </span>
@@ -270,7 +270,7 @@ const Header = () => {
                   />
                 </div>
                 <div className="user-text">
-                  <h6>Ryan Taylor</h6>
+                  <h6> Signet</h6>
                   <p className="text-muted mb-0">Administrator</p>
                 </div>
               </div>

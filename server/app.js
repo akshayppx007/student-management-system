@@ -30,8 +30,14 @@ app.use(cookieParser());
 
 // routes
 const user = require("./routes/userRoutes");
+const departments = require("./routes/department/departmentRoutes");
+// const staff = require("./routes/staff/staffRoutes");
+// const Students = require("./routes/student/studentRoutes");
 
 app.use("/api/v1", user);
+app.use("/api/v1", departments);
+// app.use("/api/v1", staff);
+// app.use("/api/v1", Students);
 
 // middlewares
 app.use(errorMiddleware);

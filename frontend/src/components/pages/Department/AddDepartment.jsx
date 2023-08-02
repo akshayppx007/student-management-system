@@ -3,12 +3,51 @@ import DatePicker from 'react-datepicker';
 import { Link } from 'react-router-dom';
 import Header from '../../Header/Header'
 import SideBar from '../../SideBar/SideBar'
+import { useDispatch } from 'react-redux';
+import { addDepartment } from '../../../actions/departments/departmentActions';
 
 const AddDepartment = () => {
     const [date, setDate] = useState(new Date());
     const handleChange = (date) => {
         setDate(date);
     };
+
+    const [formData, setFormData] = useState({
+        name: '',
+        email: '',
+        mobileNumber: '',
+        departmentName: '',
+        id: '',
+      });
+    
+      const dispatch = useDispatch();
+    
+      const handleInputChange = (event) => {
+        const { name, value } = event.target;
+        setFormData((prevFormData) => ({
+          ...prevFormData,
+          [name]: value,
+        }));
+      };
+    
+      const handleSubmit = async (event) => {
+        event.preventDefault();
+        try {
+          await dispatch(addDepartment(formData));
+          setFormData({
+            name: '',
+            email: '',
+            mobileNumber: '',
+            departmentName: '',
+            id: '',
+          });
+          console.log('Department added:', formData);
+        } catch (error) {
+          console.error('Error adding department:', error);
+        }
+      };
+    
+ 
     return (
         <>
             <div className="main-wrapper">
@@ -41,7 +80,7 @@ const AddDepartment = () => {
                             <div className="col-sm-12">
                                 <div className="card">
                                     <div className="card-body">
-                                        <form>
+                                        <form onSubmit={handleSubmit}> 
                                             <div className="row">
                                                 <div className="col-12">
                                                     <h5 className="form-title">
@@ -51,25 +90,45 @@ const AddDepartment = () => {
                                                 <div className="col-12 col-sm-4">
                                                     <div className="form-group local-forms">
                                                         <label>
-                                                            Department ID <span className="login-danger">*</span>
+                                                             Name <span className="login-danger">*</span>
                                                         </label>
-                                                        <input type="text" className="form-control" />
+                                                        <input 
+                                                        type="text" name="name" value={formData.name} onChange={handleInputChange}
+                                                        className="form-control" />
                                                     </div>
                                                 </div>
                                                 <div className="col-12 col-sm-4">
                                                     <div className="form-group local-forms">
                                                         <label>
-                                                            Department Name <span className="login-danger">*</span>
+                                                           Email <span className="login-danger">*</span>
                                                         </label>
-                                                        <input type="text" className="form-control" />
+                                                        <input 
+                                                        type="email" name="email" value={formData.email} onChange={handleInputChange}
+                                                        className="form-control" />
                                                     </div>
                                                 </div>
                                                 <div className="col-12 col-sm-4">
                                                     <div className="form-group local-forms">
                                                         <label>
-                                                            Head of Department <span className="login-danger">*</span>
+                                                        Department Name <span className="login-danger">*</span>
                                                         </label>
-                                                        <input type="text" className="form-control" />
+                                                        <input type="text" name="departmentName" value={formData.departmentName} onChange={handleInputChange}  className="form-control" />
+                                                    </div>
+                                                </div>
+                                                <div className="col-12 col-sm-4">
+                                                    <div className="form-group local-forms">
+                                                        <label>
+                                                        Mobile Number <span className="login-danger">*</span>
+                                                        </label>
+                                                        <input type="text" name="mobileNumber" value={formData.mobileNumber} onChange={handleInputChange} className="form-control" />
+                                                    </div>
+                                                </div>
+                                                <div className="col-12 col-sm-4">
+                                                    <div className="form-group local-forms">
+                                                        <label>
+                                                           Department Id <span className="login-danger">*</span>
+                                                        </label>
+                                                        <input type="text" name="id" value={formData.id} onChange={handleInputChange} className="form-control" />
                                                     </div>
                                                 </div>
                                                 <div className="col-12 col-sm-4">
