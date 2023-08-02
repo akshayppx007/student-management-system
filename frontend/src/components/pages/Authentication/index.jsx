@@ -1,20 +1,59 @@
-import React, { useRef } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import "owl.carousel/dist/assets/owl.carousel.css";
 import "owl.carousel/dist/assets/owl.theme.default.css";
-import ReactPasswordToggleIcon from 'react-password-toggle-icon';
+import ReactPasswordToggleIcon from "react-password-toggle-icon";
 import { login } from "../../imagepath";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import FeatherIcon from "feather-icons-react";
+import { useDispatch, useSelector } from "react-redux";
+import { loginUsers } from "../../../actions/userActions";
 
 const Login = () => {
+  const [validated, setValidated] = useState(false);
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
+  const { loading, error, user, isAuthenticated } = useSelector(
+    (state) => state.persistReducer.authUser
+  );
   let inputRef = useRef();
-  const showIcon = () => <i class="feather feather-eye" aria-hidden="true">
-    <FeatherIcon icon ="eye" />
-  </i>;
-  const hideIcon = () => <i class="feather feather-eye-slash" aria-hidden="true">
-    <FeatherIcon icon = "eye-off" />
-  </i>
-  
+  const showIcon = () => (
+    <i class="feather feather-eye" aria-hidden="true">
+      <FeatherIcon icon="eye" />
+    </i>
+  );
+  const hideIcon = () => (
+    <i class="feather feather-eye-slash" aria-hidden="true">
+      <FeatherIcon icon="eye-off" />
+    </i>
+  );
+
+  useEffect(() => {
+		if (isAuthenticated == true && user && user.role === "Admin") {
+			navigate("/admindashboard");
+			console.log("welcome Admin")
+		} else if (isAuthenticated == true && user && user.role != "Admin") {
+			navigate("/studentdashboard");
+			console.log(`welcome ${user.userName}`);
+		}
+		if (error) {
+			console.log(error)
+			// dispatch(clearErrors());
+		}
+	}, [isAuthenticated, user, navigate, dispatch, error]);
+  const handleSubmit = (event) => {
+    event.preventDefault();
+    const form = event.currentTarget;
+
+    if (form.checkValidity() === false) {
+      event.stopPropagation();
+    } else {
+      const formData = new FormData();
+      formData.set("userName", event.target.userName.value);
+      formData.set("password", event.target.password.value);
+      dispatch(loginUsers(formData));
+    }
+    setValidated(true);
+  };
 
   return (
     <>
@@ -33,12 +72,17 @@ const Login = () => {
                   </p>
                   <h2>Sign in</h2>
                   {/* Form */}
-                  <form action="./admindashboard">
+                  <form
+                    encType="application/json"
+                    noValidate
+                    validated={validated}
+                    onSubmit={handleSubmit}
+                  >
                     <div className="form-group">
                       <label>
                         Username <span className="login-danger">*</span>
                       </label>
-                      <input className="form-control" type="text" />
+                      <input className="form-control" type="text" name="userName" />
                       <span className="profile-views">
                         <i className="fas fa-user-circle" />
                       </span>
@@ -47,7 +91,12 @@ const Login = () => {
                       <label>
                         Password <span className="login-danger">*</span>
                       </label>
-                      <input ref={inputRef} className="form-control pass-input" type="password" />
+                      <input
+                        ref={inputRef}
+                        className="form-control pass-input"
+                        type="password"
+                        name="password"
+                      />
                       <ReactPasswordToggleIcon
                         inputRef={inputRef}
                         showIcon={showIcon}
@@ -69,7 +118,10 @@ const Login = () => {
                       <Link to="/forgotpassword">Forgot Password?</Link>
                     </div>
                     <div className="form-group">
-                      <button className="btn btn-primary btn-block" type="submit">
+                      <button
+                        className="btn btn-primary btn-block"
+                        type="submit"
+                      >
                         Login
                       </button>
                     </div>
@@ -100,7 +152,6 @@ const Login = () => {
           </div>
         </div>
       </div>
-
     </>
   );
 };
